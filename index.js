@@ -6,6 +6,8 @@ app.get("/", function(req, res){
   res.sendFile(__dirname + "/index.html");
 });
 
+app.use("/css", express.static(__dirname + '/css'));
+
 io.on("connection", function(socket){
   console.log("a user connected!");
   socket.on("disconnect", function(){
@@ -21,6 +23,6 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(3000, function(){
-  console.log("Listening on port 3000");
+http.listen(process.env.PORT || 3000, function(){
+  console.log('listening on', http.address().port);
 });
